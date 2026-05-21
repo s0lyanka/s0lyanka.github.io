@@ -3,82 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player Pro</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Мировое Время</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background"></div>
-    
-    <!-- Переключатель тем -->
-    <div class="theme-switcher">
-        <button class="theme-btn" data-theme="dark" title="Темная">🌙</button>
-        <button class="theme-btn active" data-theme="light" title="Светлая">☀️</button>
-        <button class="theme-btn" data-theme="neon" title="Неон">⚡</button>
-    </div>
 
-    <div class="container">
-        <div class="player">
-            <!-- Шапка -->
-            <div class="player-header">
-                <h1>Music Player</h1>
-                <span class="mini-player-btn">⤢</span>
+    <div class="interface-container" id="clock-card">
+        <div class="clock-content">
+            <div class="location-box">
+                <span id="city-emoji" class="emoji">🏙️</span>
+                <h1 id="city-name">Москва</h1>
             </div>
-
-            <!-- Обложка альбома -->
-            <div class="now-playing">
-                <div class="album-cover">
-                    <img id="albumArt" src="https://via.placeholder.com/300" alt="Album">
-                    <div class="play-overlay">
-                        <span>▶️</span>
-                    </div>
-                </div>
-
-                <div class="track-details">
-                    <h2 id="trackTitle">Выберите трек</h2>
-                    <p id="trackArtist">Исполнитель</p>
-                </div>
-            </div>
-
-            <!-- Прогресс бар -->
-            <div class="progress-section">
-                <div class="time-display">
-                    <span id="currentTime">0:00</span>
-                    <span id="duration">0:00</span>
-                </div>
-                <div class="progress-bar-container">
-                    <div class="progress-fill" id="progressFill"></div>
-                    <input type="range" id="progressInput" min="0" max="100" value="0" class="progress-bar">
-                </div>
-            </div>
-
-            <!-- Основные контролы -->
-            <div class="controls">
-                <button class="btn control-btn" id="repeatBtn" title="Повтор">🔁</button>
-                <button class="btn control-btn" id="prevBtn" title="Назад">⏮️</button>
-                <button class="btn play-btn" id="playBtn" title="Играть">▶️</button>
-                <button class="btn control-btn" id="nextBtn" title="Вперед">⏭️</button>
-                <button class="btn control-btn" id="shuffleBtn" title="Перемешать">🔀</button>
-            </div>
-
-            <!-- Громкость -->
-            <div class="volume-section">
-                <span class="vol-icon">🔊</span>
-                <input type="range" id="volumeInput" min="0" max="100" value="70" class="volume-slider">
-                <span class="vol-value" id="volumeValue">70%</span>
-            </div>
-
-            <!-- Очередь треков -->
-            <div class="queue-section">
-                <div class="queue-header">
-                    <h3>Очередь</h3>
-                    <span class="queue-count" id="queueCount">0 треков</span>
-                </div>
-                <div class="queue" id="queue"></div>
-            </div>
+            
+            <div class="time-display" id="time-string">00:00:00</div>
+            <div class="date-display" id="date-string">Понедельник, 1 января</div>
+            <div class="timezone-badge" id="timezone-offset">UTC+3</div>
+            
+            <button id="next-city-btn">Сменить город 🌍</button>
         </div>
     </div>
 
-    <audio id="audioPlayer"></audio>
     <script src="script.js"></script>
 </body>
 </html>
