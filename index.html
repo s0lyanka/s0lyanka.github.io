@@ -3,17 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <title>Music Player - Ликвид Гласс</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div class="interface-container">
-        <h1 id="main-title">Привет!</h1>
-        
-        <button id="action-btn">Нажми на меня</button>
-        
-        <p id="output-text" class="hidden"></p>
+    <div class="background-gif"></div>
+    
+    <!-- Переключатель тем -->
+    <div class="theme-switcher">
+        <button class="theme-btn" data-theme="dark" title="Тёмная тема">🌙</button>
+        <button class="theme-btn" data-theme="light" title="Светлая тема">☀️</button>
+        <button class="theme-btn" data-theme="neon" title="Неон">⚡</button>
     </div>
+
+    <div class="container">
+        <div class="player-glass">
+            <!-- Обложка альбома -->
+            <div class="album-art">
+                <img id="albumArt" src="https://via.placeholder.com/200?text=Music" alt="Album Art">
+            </div>
+
+            <!-- Информация о треке -->
+            <div class="track-info">
+                <h2 id="trackTitle">Выберите трек</h2>
+                <p id="trackArtist">Исполнитель</p>
+            </div>
+
+            <!-- Прогресс-бар -->
+            <div class="progress-container">
+                <span id="currentTime">0:00</span>
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                    <input 
+                        type="range" 
+                        min="0" 
+                        max="100" 
+                        value="0" 
+                        id="progressInput"
+                        class="progress-input"
+                    >
+                </div>
+                <span id="duration">0:00</span>
+            </div>
+
+            <!-- Управление плеером -->
+            <div class="controls">
+                <button class="control-btn" id="prevBtn" title="Предыдущий трек">⏮️</button>
+                <button class="control-btn play-btn" id="playBtn" title="Воспроизвести">▶️</button>
+                <button class="control-btn" id="nextBtn" title="Следующий трек">⏭️</button>
+            </div>
+
+            <!-- Громкость -->
+            <div class="volume-control">
+                <span>🔊</span>
+                <input 
+                    type="range" 
+                    min="0" 
+                    max="100" 
+                    value="70" 
+                    id="volumeInput"
+                    class="volume-input"
+                >
+                <span id="volumeValue">70%</span>
+            </div>
+
+            <!-- Список треков -->
+            <div class="playlist-container">
+                <h3>Плейлист</h3>
+                <div class="playlist" id="playlist"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрытый аудио элемент -->
+    <audio id="audioPlayer"></audio>
 
     <script src="script.js"></script>
 </body>
