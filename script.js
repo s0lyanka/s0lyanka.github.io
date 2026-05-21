@@ -13,10 +13,9 @@ const trackTitle = document.getElementById('trackTitle');
 const trackArtist = document.getElementById('trackArtist');
 const albumArt = document.getElementById('albumArt');
 const playlist = document.getElementById('playlist');
-const themeButtons = document.querySelectorAll('.theme-btn');
-const albumArtImg = document.querySelector('.album-art img');
-const playerGlass = document.querySelector('.player-glass');
-
+const themeButtons = document.querySelectorAll('.theme-btn'); // или getElementById, смотря что в HTML
+const albumArtImg = document.getElementById('albumArtImg');
+const playerGlass = document.getElementById('playerGlass');
 let currentTrackIndex = 0;
 let isPlaying = false;
 
