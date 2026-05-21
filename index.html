@@ -24,7 +24,7 @@
                 <span class="mini-player-btn">⤢</span>
             </div>
 
-            <!-- Основная обложка -->
+            <!-- Обложка альбома -->
             <div class="now-playing">
                 <div class="album-cover">
                     <img id="albumArt" src="https://via.placeholder.com/300" alt="Album">
@@ -39,19 +39,19 @@
                 </div>
             </div>
 
-            <!-- Прогресс -->
+            <!-- Прогресс бар -->
             <div class="progress-section">
                 <div class="time-display">
                     <span id="currentTime">0:00</span>
                     <span id="duration">0:00</span>
                 </div>
                 <div class="progress-bar-container">
-                    <input type="range" id="progressInput" min="0" max="100" value="0" class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
+                    <input type="range" id="progressInput" min="0" max="100" value="0" class="progress-bar">
                 </div>
             </div>
 
-            <!-- Контролы -->
+            <!-- Основные контролы -->
             <div class="controls">
                 <button class="btn control-btn" id="repeatBtn" title="Повтор">🔁</button>
                 <button class="btn control-btn" id="prevBtn" title="Назад">⏮️</button>
@@ -60,13 +60,11 @@
                 <button class="btn control-btn" id="shuffleBtn" title="Перемешать">🔀</button>
             </div>
 
-            <!-- Громкость и доп функции -->
-            <div class="bottom-controls">
-                <div class="volume-section">
-                    <span class="vol-icon">🔊</span>
-                    <input type="range" id="volumeInput" min="0" max="100" value="70" class="volume-slider">
-                    <span class="vol-value" id="volumeValue">70%</span>
-                </div>
+            <!-- Громкость -->
+            <div class="volume-section">
+                <span class="vol-icon">🔊</span>
+                <input type="range" id="volumeInput" min="0" max="100" value="70" class="volume-slider">
+                <span class="vol-value" id="volumeValue">70%</span>
             </div>
 
             <!-- Очередь треков -->
