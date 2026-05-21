@@ -2,71 +2,423 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    /* Темная тема */
+    --bg-primary: #0f0f0f;
+    --bg-secondary: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --accent: #1db954;
+    --border-color: rgba(255, 255, 255, 0.2);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --backdrop: rgba(31, 31, 31, 0.4);
+}
+
+body.light-theme {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: rgba(0, 0, 0, 0.08);
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --accent: #1db954;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --backdrop: rgba(255, 255, 255, 0.6);
+}
+
+body.neon-theme {
+    --bg-primary: #0a0a1a;
+    --bg-secondary: rgba(0, 255, 255, 0.1);
+    --text-primary: #00ffff;
+    --text-secondary: #ff00ff;
+    --accent: #00ffff;
+    --border-color: rgba(0, 255, 255, 0.3);
+    --shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    --backdrop: rgba(10, 10, 26, 0.5);
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 body {
-    background-image: url('https://wallpaperaccess.com/full/9336992.gif');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100vh;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Фоновый GIF */
+.background-gif {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif') center/cover;
+    z-index: -2;
+    animation: zoomIn 20s infinite alternate;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-primary);
+    opacity: 0.7;
+    z-index: -1;
+}
+
+/* Переключатель тем */
+.theme-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+    background: var(--backdrop);
+    padding: 12px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.theme-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.theme-btn:hover {
+    background: var(--accent);
+    transform: scale(1.1);
+    color: #000;
+}
+
+.theme-btn.active {
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+}
+
+/* Контейнер плеера */
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-.interface-container {
-    background: rgba(255, 255, 255, 0.15);
+.player-glass {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 30px;
+    background: var(--backdrop);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 30px;
-    border-radius: 15px;
+    box-shadow: var(--shadow);
+    animation: slideUp 0.6s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Обложка альбома */
+.album-art {
     text-align: center;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
 }
 
-h1 {
-    margin-bottom: 15px;
-    font-size: 2rem;
-}
-
-p {
-    margin-bottom: 20px;
-    font-size: 1rem;
-    line-height: 1.4;
-}
-
-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    border-radius: 8px;
+.album-art img {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    animation: rotate 20s linear infinite;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.1s ease;
+    transition: transform 0.3s ease;
 }
 
-button:hover {
-    background: #0056b3;
+.album-art img:hover {
+    transform: scale(1.05);
 }
 
-button:active {
-    transform: scale(0.98);
+.album-art img.playing {
+    animation: rotate 3s linear infinite;
 }
 
-.hidden {
-    display: none;
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-#output-text {
-    margin-top: 20px;
+/* Информация о треке */
+.track-info {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.track-info h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.track-info p {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* Прогресс бар */
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #00ff88);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+.progress-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Управление плеером */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: var(--accent);
+    transform: scale(1.1);
+    color: #000;
+    box-shadow: 0 0 15px var(--accent);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.play-btn {
+    width: 65px;
+    height: 65px;
+    font-size: 26px;
+    background: linear-gradient(135deg, var(--accent), #00ff88);
+    border: none;
+}
+
+.play-btn:hover {
+    box-shadow: 0 0 25px var(--accent);
+}
+
+/* Громкость */
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: var(--bg-secondary);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.volume-input {
+    flex: 1;
+    height: 6px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+#volumeValue {
+    min-width: 35px;
+    text-align: right;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* Плейлист */
+.playlist-container {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.playlist-container h3 {
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.track-item {
+    padding: 12px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    font-size: 13px;
+}
+
+.track-item:hover {
+    background: var(--accent);
+    color: #000;
+    transform: translateX(5px);
+}
+
+.track-item.active {
+    background: linear-gradient(135deg, var(--accent), #00ff88);
+    color: #000;
+    border-color: var(--accent);
     font-weight: bold;
-    color: #00ffcc;
 }
+
+/* Скроллбар плейлиста */
+.playlist-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.playlist-container::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 10px;
+}
+
+.playlist-container::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+
+.playlist-container::-webkit-scrollbar-thumb:hover {
+    background: #00ff88;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .player-glass {
+        max-width: 100%;
+        padding: 25px 20px;
+        border-radius: 20px;
+    }
+
+    .album-art img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .track-info h2 {
+        font-size: 20px;
+    }
+
+    .controls {
+        gap: 20px;
+    }
+
+    .control-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .play-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+    }
+
+    .theme-switcher {
+        top: 15px;
+        right: 15px;
+        
